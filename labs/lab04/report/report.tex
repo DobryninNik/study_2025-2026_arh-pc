@@ -1,0 +1,379 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  english,
+  russian,
+  12pt,
+  a4paper,
+  DIV=11,
+  numbers=noendperiod]{scrreprt}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{setspace}
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+
+\ifLuaTeX
+\usepackage[bidi=basic,provide=*]{babel}
+\else
+\usepackage[bidi=default,provide=*]{babel}
+\fi
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+\usepackage[backend=biber,langhook=extras,autolang=other*]{biblatex}
+\addbibresource{bib/cite.bib}
+
+\usepackage[]{csquotes}
+
+\usepackage{indentfirst}
+\usepackage{float}
+\floatplacement{figure}{H}
+\IfFileExists{plex-otf.sty}{
+  %% Full TeXlive
+  \IfPackageAtLeastTF{plex-otf.sty}{2024-12-06}{
+    \usepackage[math,RM={Scale=0.94},SS={Scale=0.94},SScon={Scale=0.94},TT={Scale=MatchLowercase,FakeStretch=0.9},DefaultFeatures={Ligatures=Common}]{plex-otf}
+  }{
+    \usepackage[RM={Scale=0.94},SS={Scale=0.94},SScon={Scale=0.94},TT={Scale=MatchLowercase,FakeStretch=0.9},DefaultFeatures={Ligatures=Common}]{plex-otf}
+  }
+}{
+  %% TinyTeX
+  \usepackage{libertine}
+}
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Содержание}
+\else
+  \newcommand\contentsname{Содержание}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{Список иллюстраций}
+\else
+  \newcommand\listfigurename{Список иллюстраций}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{Список таблиц}
+\else
+  \newcommand\listtablename{Список таблиц}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Рисунок}
+\else
+  \newcommand\figurename{Рисунок}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Таблица}
+\else
+  \newcommand\tablename{Таблица}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Список}
+\newcommand*\listoflistings{\listof{codelisting}{Листинги}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdflang={ru-RU},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+
+\author{}
+\date{}
+\begin{document}
+
+\renewcommand*\contentsname{Содержание}
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\listoffigures
+\listoftables
+
+\setstretch{1.5}
+\chapter{Лабораторная работа
+№4}\label{ux43bux430ux431ux43eux440ux430ux442ux43eux440ux43dux430ux44f-ux440ux430ux431ux43eux442ux430-4}
+
+\textbf{Студент}: Добрынин Никита \textbf{Группа}: НБИбд-01-25
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Цель работы Освоение процедуры компиляции и сборки программ,
+  написанных на ассемблере NASM.
+\item
+  Самостоятельная работа
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    В каталоге \textasciitilde/work/arch-pc/lab04 с помощью команды cp
+    создайте копию файла hello.asm с именем lab4.asm
+  \item
+    С помощью любого текстового редактора внесите изменения в текст
+    программы в файле lab4.asm так, чтобы вместо Hello world! на экран
+    выводилась строка с вашими фамилией и именем.
+  \item
+    Оттранслируйте полученный текст программы lab4.asm в объектный файл.
+    Выполните компоновку объектного файла и запустите получившийся
+    исполняемый файл.
+  \item
+    Скопируйте файлы hello.asm и lab4.asm в Ваш локальный репозиторий в
+    ката- лог \textasciitilde/work/study/2023-2024/\enquote{Архитектура
+    компьютера}/arch-pc/labs/lab04/. Загрузите файлы на Github.
+  \end{enumerate}
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Выполнение работы
+\end{enumerate}
+
+\pandocbounded{\includegraphics[keepaspectratio]{Home/Pictures/Screenshots/Pic1.jpg}}
+Рис.1
+
+Создал каталог, перешел в него, создал текстовый файл hello.asm и окрыл
+его с помощью gedit (Рис.1)
+
+\pandocbounded{\includegraphics[keepaspectratio]{Home/Pictures/Screenshots/Pic2.jpg}}
+Рис.2
+
+Ввел показанный текст (Рис.2)
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{Home/Pictures/Screenshots/Pic3.jpg}}
+
+}
+
+\caption{Рис.3}
+
+\end{figure}%
+
+Провел компиляцию текста программы при помощи команды nasm -f elf
+hello.asm (Рис.3)
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{Home/Pictures/Screenshots/Pic4.jpg}}
+
+}
+
+\caption{Рис.4}
+
+\end{figure}%
+
+Выполнил полный вариант командной строки NASM (Рис.4)
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{Home/Pictures/Screenshots/Pic5.jpg}}
+
+}
+
+\caption{Рис.5}
+
+\end{figure}%
+
+Передал объектный файл на обработку компановщика (Рис.5)
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{Home/Pictures/Screenshots/Pic6.jpg}}
+
+}
+
+\caption{Рис.6}
+
+\end{figure}%
+
+Задал имя исполняемому файлу (Рис.6)
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{Home/Pictures/Screenshots/Pic7.jpg}}
+
+}
+
+\caption{Рис.7}
+
+\end{figure}%
+
+Запустил исполняемый файл (Рис.7)
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\#Выполнение самостоятельной работы
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{Home/Pictures/Screenshots/Pic8.jpg}}
+
+}
+
+\caption{Рис.8}
+
+\end{figure}%
+
+Создал копию файла hello.asm с именем lab4.asm (Рис.8)
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{Home/Pictures/Screenshots/Pic11.jpg}}
+
+}
+
+\caption{Рис.9}
+
+\end{figure}%
+
+Внес изменения в текст программы что бы она выводила мои имя и фамилию
+(Рис.9)
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{Home/Pictures/Screenshots/Pic8.jpg}}
+
+}
+
+\caption{Рис.10}
+
+\end{figure}%
+
+Оттранслировал полученный текст программы в объектный файл (Рис.10)
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{Home/Pictures/Screenshots/Pic9.jpg}}
+
+}
+
+\caption{Рис.11}
+
+\end{figure}%
+
+Выполнил компановку объектного файла
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{Home/Pictures/Screenshots/Pic10.jpg}}
+
+}
+
+\caption{Рис.12}
+
+\end{figure}%
+
+Запустил файл, всё сработало корректно
+
+
+\printbibliography
+
+
+
+\end{document}
